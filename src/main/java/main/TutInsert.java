@@ -74,30 +74,30 @@ public class TutInsert {
 //        est.insertMany(documents, options);
 
 //Fourth option: Use Gson
-//            Supplier s = Supplier.builder().street("street103").town("Boston")
-//                    .country("USA").pcode("123212")
-//                    .coffee(Coffee.builder()
-//                            .idProd(2000)
-//                            .cofName("Coffee 9")
-//                            .price(15.00).build())
-//                    .coffee(Coffee.builder()
-//                            .idProd(9000)
-//                            .cofName("Coffee 9")
-//                            .price(15.00).build())
-//                    .build();
-//            Document document = Document.parse(new Gson().toJson(s));
-//            est.insertOne(document);
+            Supplier s = Supplier.builder().street("street19").town("Boston")
+                    .country("USA").pcode("123212")
+                    .coffee(Coffee.builder()
+                            .idProd(2000)
+                            .cofName("Coffee 9")
+                            .price(15.00).build())
+                    .coffee(Coffee.builder()
+                            .idProd(9000)
+                            .cofName("Coffee 9")
+                            .price(15.00).build())
+                    .build();
+            Document document = Document.parse(new Gson().toJson(s));
+            est.insertOne(document);
 //
 ////Add a list of coffees
-//            List<Document> coffeeDocuments = new ArrayList<>();
-//            for (Coffee coffee : s.getCoffees()) {
-//                String coffeeJson = new Gson().toJson(coffee);
-//                Document coffeeDocument = Document.parse(coffeeJson);
-//                coffeeDocuments.add(coffeeDocument);
-//            }
-//        est.updateOne(
-//                eq("_id", s.getSupp_id()),
-//                push("coffees", coffeeDocuments));
+            List<Document> coffeeDocuments = new ArrayList<>();
+            for (Coffee coffee : s.getCoffees()) {
+                String coffeeJson = new Gson().toJson(coffee);
+                Document coffeeDocument = Document.parse(coffeeJson);
+                coffeeDocuments.add(coffeeDocument);
+            }
+        est.updateOne(
+                eq("_id", s.getSupp_id()),
+                push("coffees", coffeeDocuments));
 
 //Add one coffee: In TutUpdate
 

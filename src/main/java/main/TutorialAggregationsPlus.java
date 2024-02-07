@@ -19,11 +19,11 @@ import static com.mongodb.client.model.Filters.*;
 public class TutorialAggregationsPlus {
 
     public static void main(String[] args) {
-        MongoClient mongo = MongoClients.create("mongodb://dam2.mysql.iesquevedo.es:2323");
-
-        MongoDatabase db = mongo.getDatabase("oscar");
-
-        MongoCollection<Document> b = db.getCollection("biblioteca");
+//        MongoClient mongo = MongoClients.create("mongodb://dam2.mysql.iesquevedo.es:2323");
+//
+//        MongoDatabase db = mongo.getDatabase("oscar");
+//
+//        MongoCollection<Document> b = db.getCollection("biblioteca");
 
 //        b.aggregate(
 //                Arrays.asList(
@@ -42,20 +42,20 @@ public class TutorialAggregationsPlus {
 //                .into(new ArrayList<>()).forEach(document -> System.out.println(document.get("numero")));
 
 
-        MongoCollection<Document> col = db.getCollection("games");
-
-        col.aggregate(Arrays.asList(
-                match(and(eq("platform", "Wii"), ne("precio", "0"))),
-
-                addFields(new Field("precio",
-                                new Document("$toDouble", "$eu_sales")),
-                        new Field("precio1",
-                                new Document("$toDouble", "$eu_sales"))),
-                group(new BsonNull(), sum("cantidad", 1L),
-                        avg("precio", "$precio"),
-                        max("preciomaximo", "$precio"))))
-
-                .into(new ArrayList<>()).forEach(System.out::println);
+//        MongoCollection<Document> col = db.getCollection("games");
+//
+//        col.aggregate(Arrays.asList(
+//                match(and(eq("platform", "Wii"), ne("precio", "0"))),
+//
+//                addFields(new Field("precio",
+//                                new Document("$toDouble", "$eu_sales")),
+//                        new Field("precio1",
+//                                new Document("$toDouble", "$eu_sales"))),
+//                group(new BsonNull(), sum("cantidad", 1L),
+//                        avg("precio", "$precio"),
+//                        max("preciomaximo", "$precio"))))
+//
+//                .into(new ArrayList<>()).forEach(System.out::println);
 
 
     }

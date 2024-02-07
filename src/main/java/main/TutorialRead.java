@@ -74,22 +74,22 @@ public class TutorialRead {
 //        }
 
 // Get all coffees
-//        try (MongoClient mongo = MongoClients.create("mongodb://informatica.iesquevedo.es:2323")) {
-//            MongoDatabase db = mongo.getDatabase("luciasanmiguel_coffeecompany");
-//            MongoCollection<Document> est = db.getCollection("suppliers");
-//            List<Coffee> coffeesList = new ArrayList<>();
-//            List<Document> documents = est.find()
-//                    .projection(fields(excludeId(), include("coffees")))
-//                    .into(new ArrayList<>());
-//            for (Document document : documents) {
-//                List<Document> documentCoffees = (List<Document>) document.get("coffees");
-//                for (Document coffee : documentCoffees) {
-//                    coffeesList.add(new Gson().fromJson(coffee.toJson(), Coffee.class));
-//                }
-//
-//            }
-//            System.out.println(coffeesList);
-//        }
+        try (MongoClient mongo = MongoClients.create("mongodb://informatica.iesquevedo.es:2323")) {
+            MongoDatabase db = mongo.getDatabase("luciasanmiguel_coffeecompany");
+            MongoCollection<Document> est = db.getCollection("suppliers");
+            List<Coffee> coffeesList = new ArrayList<>();
+            List<Document> documents = est.find()
+                    .projection(fields(excludeId(), include("coffees")))
+                    .into(new ArrayList<>());
+            for (Document document : documents) {
+                List<Document> documentCoffees = (List<Document>) document.get("coffees");
+                for (Document coffee : documentCoffees) {
+                    coffeesList.add(new Gson().fromJson(coffee.toJson(), Coffee.class));
+                }
+
+            }
+            System.out.println(coffeesList);
+        }
     }
 }
 

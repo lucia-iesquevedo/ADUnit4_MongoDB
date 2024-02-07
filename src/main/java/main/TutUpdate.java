@@ -37,9 +37,9 @@ public class TutUpdate {
 //              eq("country", "Spain"),
 //              set("pcode", "111")).getModifiedCount());
 
-//      System.out.println(est.updateOne(
-//              eq("country", "Spain"),
-//              set("coffees.0.price", "11.34")).getModifiedCount());
+      System.out.println(est.updateOne(
+              eq("country", "Spain"),
+              set("coffees.0.price", "11.34")).getModifiedCount());
 //
 //      System.out.println(est.updateOne(
 //              eq("coffees._id", 1000),
@@ -49,7 +49,7 @@ public class TutUpdate {
       // Update all prices for coffees with supplier id --- Does not work because Mongo does not support
       // the positional operator $ in nested arrays - It has to be done one by one with the coffee Id
 //    System.out.println(est.updateMany(
-//            eq(eq("_id", new ObjectId("65a7b5998949bca214b9df9f"))),
+   //         eq(eq("_id", new ObjectId("65a7b5998949bca214b9df9f"))),
 //            set("coffees.$.price","15.00")).getModifiedCount());
 
 

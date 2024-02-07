@@ -31,7 +31,7 @@ public class TutAggregation {
     public static void main(String[] args) {
         MongoClient mongo = MongoClients.create("mongodb://dam2.tomcat.iesquevedo.es:2323");
 
-        MongoDatabase db = mongo.getDatabase("lucia");
+        MongoDatabase db = mongo.getDatabase("luciasanmiguel_zipcodes");
         MongoCollection<Document> col = db.getCollection("zipcodes");
 
 //MATCH
@@ -39,24 +39,30 @@ public class TutAggregation {
         // Mongo shell
         //db.zipcodes.aggregate({ $match: { city: "CUSHMAN" }})
 
-//        //First option
-        List<Document> list = new ArrayList<>();
-        list.add(Document.parse("{ $match: { city: \"CUSHMAN\" } }"));
-        col.aggregate(list).map(document -> document.getString("_id")+" belongs to CUSHMAN city").into(new ArrayList<>()).forEach(System.out::println);
+        //Option from Compass: Noooooo
+
+//        Arrays.asList(new Document("$match",
+//                new Document("city", "CUSHMAN")))
+
+//        //First option: NOOOOO
+//        List<Document> list = new ArrayList<>();
+//        list.add(Document.parse("{ $match: { city: \"CUSHMAN\" } }"));
+//        col.aggregate(list).map(document -> document.getString("_id")+" belongs to CUSHMAN city").into(new ArrayList<>()).forEach(System.out::println);
 //
-//        //Second option
-//        col.aggregate(Arrays.asList(
-//                match(eq("city", "CUSHMAN"))))
-//                        .into(new ArrayList<>()).forEach(document -> System.out.println(document.get("_id")+" belongs to CUSHMAN city"));
+//        //Second option: Yeees
+       col.aggregate(Arrays.asList(
+                match(eq("city", "CUSHMAN"))))
+                        .into(new ArrayList<>()).forEach(document -> System.out.println(document.get("_id")+" belongs to CUSHMAN city"));
 //
+/// More than one
 ////AND
         // Zipcodes with population between 10000 to 20000
         // Mongo shell
         //db.zipcodes.aggregate({ $match: { $and: [ { "pop": { $gt: 10000, $lt: 20000 } } ] } } )
 
-//        col.aggregate(Arrays.asList(
-//                match(and(gt("pop", 10000),lte("pop",20000)))))
-//                .into(new ArrayList<>()).forEach(System.out::println);
+        col.aggregate(Arrays.asList(
+                match(and(gt("pop", 10000),lte("pop",20000)))))
+                .into(new ArrayList<>()).forEach(System.out::println);
 
 
 //PROJECT
@@ -70,10 +76,10 @@ public class TutAggregation {
 //        list2.add(Document.parse("{$project: {pop:1}}"));
 //        col.aggregate(list2).map(document -> document.getInteger("pop")+": population of zipcode "+ document.getString("_id")+" from INDIANAPOLIS").into(new ArrayList<>()).forEach(System.out::println);
 //
-//        col.aggregate(Arrays.asList(
-//                        match(eq("city", "INDIANAPOLIS")),
-//                        project(fields(include("pop")))))
-//                .into(new ArrayList<>()).forEach(document -> System.out.println(document.getInteger("pop")+": population of zipcode "+ document.getString("_id")+" from INDIANAPOLIS"));
+        col.aggregate(Arrays.asList(
+                        match(eq("city", "INDIANAPOLIS")),
+                        project(fields(include("pop")))))
+                .into(new ArrayList<>()).forEach(document -> System.out.println(document.getInteger("pop")+": population of zipcode "+ document.getString("_id")+" from INDIANAPOLIS"));
 
 
 // REGEX
@@ -204,7 +210,6 @@ public class TutAggregation {
 //UNWIND & COUNT
         // Number of cities at latitude -72
 //        db.zipcodes.aggregate({$unwind: "$loc"},
-//        db.zipcodes.aggregate({$unwind: "$loc"},
 //        { $match: { $and: [ { "loc": { $gt: -73, $lte: -72 } } ] } },
 //        {$count:"Loc72" } )
 
@@ -238,9 +243,9 @@ public class TutAggregation {
 
 //        {$match: {$expr:{$eq:[{$month : {$toDate: "$dtstart"}}, 1]}}},
 //        {$project: {title:1, _id:0}}
-        MongoCollection<Document> colMad = db.getCollection("madrid");
-               colMad.aggregate(Arrays.asList(match(eq("date('$dtstart')",1))))
-                       .into(new ArrayList<>()).forEach(document -> System.out.println(document.toString()));
-    }
+//        MongoCollection<Document> colMad = db.getCollection("madrid");
+//               colMad.aggregate(Arrays.asList(match(eq("date('$dtstart')",1))))
+//                       .into(new ArrayList<>()).forEach(document -> System.out.println(document.toString()));
+//    }
 
 }

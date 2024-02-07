@@ -37,12 +37,12 @@ public class TutDelete {
 //                est.deleteOne(eq("_id", new ObjectId("65a7b5998949bca214b9dfa1"))).getDeletedCount());
 
 //Delete one coffee: Create the document with the coffee to be deleted
-//            Document docCoffee = Document.parse(new Gson().toJson(new Coffee(2000, "Coffee 9", 15.00)));
+            Document docCoffee = Document.parse(new Gson().toJson(new Coffee(2000, "Coffee 9", 15.00)));
 //
 //            //Delete one coffee
-//            System.out.println(est.updateOne(
-//                    eq("_id", new ObjectId("65abb8172d02f7275a6e870b")),
-//                    pull("coffees",docCoffee)).getModifiedCount());
+            System.out.println(est.updateOne(
+                    eq("_id", new ObjectId("65b0ef68b44d34213dfdf56d")),
+                    pull("coffees",docCoffee)).getModifiedCount());
 
 //Delete all coffees
 //        List<Document> ldoc=new ArrayList<>();
