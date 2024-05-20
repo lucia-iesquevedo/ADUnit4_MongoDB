@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-@Builder @ToString
+@ToString @Builder
 
 public class Coffee {
     private int idProd;

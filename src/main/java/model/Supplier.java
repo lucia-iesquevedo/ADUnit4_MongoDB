@@ -14,7 +14,7 @@ import org.bson.types.ObjectId;
 
 public class Supplier {
 
-    private ObjectId supp_id;
+    private ObjectId _id;
     private String street;
     private String town;
     private String country;

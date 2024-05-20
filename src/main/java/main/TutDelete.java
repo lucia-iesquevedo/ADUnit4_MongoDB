@@ -41,7 +41,7 @@ public class TutDelete {
 //
 //            //Delete one coffee
             System.out.println(est.updateOne(
-                    eq("_id", new ObjectId("65b0ef68b44d34213dfdf56d")),
+                    eq("_id", new ObjectId("664b79f11beb9576d5ce8871")),
                     pull("coffees",docCoffee)).getModifiedCount());
 
 //Delete all coffees

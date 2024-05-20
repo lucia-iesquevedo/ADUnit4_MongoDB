@@ -2,12 +2,10 @@ package model;
 
 import org.bson.Document;
 
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 public class SupplierConverter {
 
@@ -29,7 +27,7 @@ public class SupplierConverter {
     if (listCof == null)
       listCof = new ArrayList();
 
-    return Supplier.builder().supp_id(d.getObjectId("_id")).street(d.getString("street")).town(d.getString("town"))
+    Supplier supp = Supplier.builder()._id(d.getObjectId("_id")).street(d.getString("street")).town(d.getString("town"))
             .country(d.getString("country")).pcode(d.getString("pcode"))
             .coffees(listCof.stream().map(document ->
                     Coffee.builder()
@@ -37,5 +35,6 @@ public class SupplierConverter {
                             .cofName(document.getString("cofName"))
                             .price(document.getDouble("price")).build()).collect(Collectors.toList()))
             .build();
+    return supp;
   }
 }
